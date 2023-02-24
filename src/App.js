@@ -12,6 +12,7 @@ function App() {
   ]);
   let [따봉, 따봉변경] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
+  let [title, setTitle] = useState(0);
 
   function titleChange() {
     let copy = [...글제목];
@@ -33,6 +34,7 @@ function App() {
             <h4
               onClick={() => {
                 setModal(!modal);
+                setTitle(i);
               }}
             >
               {글제목[i]}
@@ -52,17 +54,18 @@ function App() {
         );
       })}
 
-      {modal == true ? <Modal /> : null}
+      {modal == true ? <Modal title={title} 글제목={글제목} /> : null}
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div className="modal">
-      <h4>제목</h4>
+      <h4>{props.글제목[props.title]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button>글수정</button>
     </div>
   );
 }
